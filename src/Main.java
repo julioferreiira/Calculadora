@@ -1,17 +1,48 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.Scanner;
+
 public class Main {
+
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Scanner scanner = new Scanner(System.in);
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        System.out.println("Calculadora Simples");
+        System.out.print("Digite o primeiro número: ");
+        double numero1 = scanner.nextDouble();
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        System.out.print("Digite o segundo número: ");
+        double numero2 = scanner.nextDouble();
+
+        System.out.print("Digite a operação (+, -, *, /): ");
+        char operacao = scanner.next().charAt(0);
+
+        Calculadora calculadora = new Calculadora();
+
+        double resultado = 0;
+
+        try {
+            switch (operacao) {
+                case '+':
+                    resultado = calculadora.somar(numero1, numero2);
+                    break;
+                case '-':
+                    resultado = calculadora.subtrair(numero1, numero2);
+                    break;
+                case '*':
+                    resultado = calculadora.multiplicar(numero1, numero2);
+                    break;
+                case '/':
+                    resultado = calculadora.dividir(numero1, numero2);
+                    break;
+                default:
+                    System.out.println("Operação inválida");
+                    return;
+            }
+
+            System.out.println("Resultado: " + resultado);
+        } catch (ArithmeticException e) {
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            System.out.println("Operação concluída!");
         }
     }
 }
